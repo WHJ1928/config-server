@@ -1,0 +1,17 @@
+server:
+  port: 2222
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/WHJ1928/SpringConfig    # 配置git仓库的地址
+          search-paths: config-repo                             # git仓库地址下的相对地址，可以配置多个，用,分割。
+          username: whj1928                                        # git仓库的账号
+          password: whj13140                                   # git仓库的密码
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://120.79.19.207:1111/eureka/
