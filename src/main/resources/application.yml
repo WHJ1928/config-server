@@ -8,10 +8,22 @@ spring:
       server:
         git:
           uri: https://github.com/WHJ1928/SpringConfig    # 配置git仓库的地址
-          search-paths: config-repo                             # git仓库地址下的相对地址，可以配置多个，用,分割。
+          search-paths: {application}        # git仓库地址下的相对地址，可以配置多个，用,分割。
           username: whj1928                                        # git仓库的账号
-          password: whj13140                                   # git仓库的密码
+          password: whj13140                    # git仓库的密码
+        health:
+          enabled: false
+  security:
+    user:
+      name: haijun
+      password: 1qaz2wsx
 eureka:
   client:
     serviceUrl:
       defaultZone: http://120.79.19.207:1111/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 1        #每间隔1s，向服务端发送一次心跳，证明自己依然”存活“
+    lease-expiration-duration-in-seconds: 10    #告诉服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉
+    instance-id: ${spring.cloud.client.ipAddress}:${server.post}
+    ip-address: ${spring.cloud.client.ipAddress}
+    prefer-ip-address: true
